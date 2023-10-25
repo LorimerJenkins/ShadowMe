@@ -1,0 +1,40 @@
+{
+  "expo": {
+    "name": "ShadowMe",
+    "main": "./index.js",
+    "slug": "ShadowMe",
+    "scheme": "ShadowMe",
+    "version": "0.0.1",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/app/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/images/app/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.myapp.dev"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/app/icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.myapp.dev"
+    },
+    "web": {
+      "favicon": "./src/assets/images/app/icon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "56151393-1377-44a9-b7e6-6191057eb851"
+      }
+    },
+    "owner": "Lorimer & Marton"
+  }
+}
