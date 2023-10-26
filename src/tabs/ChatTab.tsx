@@ -1,9 +1,8 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity,
   TextInput,
   FlatList,
   ViewStyle,
@@ -12,46 +11,53 @@ import {
   Image
 } from 'react-native';
 import { AuthContext } from '../utils/AuthSession';
+import { getChats } from '../utils/getChats'
+
 
 interface Message {
   id: number;
   text: string;
-  sender: 'user' | 'helper';
+  sender: string;
 }
 
-const commonQuestions = [
-  "What is Mr Johnston like?",
-  "What did you put for the finals?",
-];
 
 const ChatTab = () => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
-  const [answeredQuestions, setAnsweredQuestions] = useState<number[]>([]);
   const scrollRef = useRef<FlatList<Message>>(null);
-
   const { userDetails } = useContext(AuthContext);
 
-  const sendMessage = (message: string, sender: 'user' | 'helper', questionIndex?: number) => {
+  useEffect(() => {
+    const fetchChats = async () => {
+      const chatLog = await getChats();
+      setMessages(chatLog.messages.map((m, index) => ({
+        id: index,
+        text: m.content,
+        sender: m.sender
+      })));
+    };
+
+    fetchChats();
+  }, []);
+
+  const sendMessage = (message: string, sender: 'sender' | 'receiver', questionIndex?: number) => {
     setMessages([...messages, { id: messages.length, text: message, sender }]);
-    if (answeredQuestions.length !== commonQuestions.length)
-      setAnsweredQuestions(commonQuestions.map((_, index) => index));
   };
 
-  const getMessageStyle = (sender: 'user' | 'helper'): ViewStyle => ({
-    backgroundColor: sender === 'user' ? '#e6e6e6' : '#d1e7dd',
-    marginVertical: 5,
-    padding: 10,
-    borderRadius: 5,
-    maxWidth: '80%',
-  });
+    const getMessageStyle = (sender: string): ViewStyle => ({
+      backgroundColor: sender === userDetails?.sub ? '#e6e6e6' : '#d1e7dd',
+      marginVertical: 5,
+      padding: 10,
+      borderRadius: 5,
+      maxWidth: '80%',
+    });
 
   const renderMessage = ({ item }: { item: Message }) => (
     <View style={styles.messageContainer}>
-      <View style={getMessageStyle(item.sender)}>
+      <View style={getMessageStyle(item.sender === userDetails?.sub ? 'sender' : 'receiver')}>
         <Text style={styles.text}>{item.text}</Text>
       </View>
-      {item.sender === 'user' && userDetails && userDetails.picture && (
+      {item.sender === userDetails?.sub && userDetails && userDetails.picture && (
         <Image source={{ uri: userDetails.picture }} style={styles.profilePic} />
       )}
     </View>
@@ -70,22 +76,13 @@ const ChatTab = () => {
         keyExtractor={(item) => item.id.toString()}
         style={styles.chatContainer}
       />
-      <View style={styles.questionsContainer}>
-        {commonQuestions.map((question, index) => (
-          !answeredQuestions.includes(index) && (
-            <TouchableOpacity key={index} onPress={() => sendMessage(question, 'user', index)}>
-              <Text style={styles.question}>{question}</Text>
-            </TouchableOpacity>
-          )
-        ))}
-      </View>
       <TextInput
         style={styles.input}
         placeholder="Type your message..."
         value={input}
         onChangeText={setInput}
         onSubmitEditing={() => {
-          sendMessage(input, 'user');
+          sendMessage(input, 'sender');
           setInput('');
         }}
       />

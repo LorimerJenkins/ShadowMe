@@ -29,7 +29,7 @@
 
 
 
-// const contract_id = 'FaxZkto6494-58WXMx1naNo6kZzUHQqj1GZ8Xq72doo'
+const contract_id = 'FaxZkto6494-58WXMx1naNo6kZzUHQqj1GZ8Xq72doo'
 
 
 // // const startChat = await sendTxn(contract_id, {function: 'startChat', data: { 
@@ -45,8 +45,8 @@
 // console.log(sendMessage)
 
 
-// import { getChat } from './warp/getChat.js'
+import { getChat } from './warp/getChat.js'
 
-// console.log(await getChat(contract_id, '123', '456'))
+console.log(await getChat(contract_id, '123', '456'))
 
 
