@@ -29,8 +29,17 @@ const ChatTab = () => {
 
   useEffect(() => {
     const fetchChats = async () => {
-      const chatLog = await getChats();
-      setMessages(chatLog.messages.map((m, index) => ({
+
+      const chatLog = await getChats({
+        // @ts-ignore
+        recipientId: userDetails?.sub,
+        senderId: '1234',
+        function: 'getChat',
+      });
+
+      console.log(chatLog.data)
+      
+      setMessages(chatLog.data.map((m, index) => ({
         id: index,
         text: m.content,
         sender: m.sender

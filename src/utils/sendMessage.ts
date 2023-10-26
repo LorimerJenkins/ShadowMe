@@ -1,4 +1,3 @@
-// postData.ts
 import axios, { AxiosResponse } from 'axios';
 
 interface PostDataPayload {
@@ -8,7 +7,7 @@ interface PostDataPayload {
     messageContent?: string;
 }
 
-export async function postDataToNetlify(payload: PostDataPayload): Promise<AxiosResponse> {
+export async function sendMessage(payload: PostDataPayload): Promise<AxiosResponse> {
 
     const endpoint = 'https://shadow-me.netlify.app/.netlify/functions/route';
 
