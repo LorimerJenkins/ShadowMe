@@ -8,7 +8,7 @@ interface PostDataPayload {
 
 export async function getChat(payload: PostDataPayload): Promise<AxiosResponse> {
 
-    const endpoint = 'https://shadow-me.netlify.app/.netlify/functions/route';
+    const endpoint = 'https://shadow-me-functions.netlify.app/.netlify/functions/route';
 
     try {
         const response = await axios.post(endpoint, payload);
