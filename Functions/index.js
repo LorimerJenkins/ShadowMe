@@ -32,20 +32,20 @@
 // const contract_id = 'FaxZkto6494-58WXMx1naNo6kZzUHQqj1GZ8Xq72doo'
 
 
-// const startChat = await sendTxn(contract_id, {function: 'startChat', data: { 
-//     recipientId: 'google-oauth2|113378216876216346011', senderId: 'google-oauth2|113378216876216346016'
-// }})
+// // const startChat = await sendTxn(contract_id, {function: 'startChat', data: { 
+// //     recipientId: 'google-oauth2|113378216876216346011', senderId: 'google-oauth2|113378216876216346016'
+// // }})
 
-// console.log(startChat)
+// // console.log(startChat)
 
-// const sendMessage = await sendTxn(contract_id, {function: 'sendMessage', data: { 
-//     recipientId: '123', senderId: '456', messageContent: 'Lorimer Test'
-//  }})
+// // const sendMessage = await sendTxn(contract_id, {function: 'sendMessage', data: { 
+// //     recipientId: '123', senderId: '456', messageContent: 'Lorimer Test'
+// //  }})
 
-// console.log(sendMessage)
+// // console.log(sendMessage)
 
 
-// import { getChat } from './warp/getChat.js'
+// import { getChat } from './functions/warp-stuff/warp/getChat.js'
 
 // console.log(await getChat(contract_id, '123', '456'))
 

@@ -132,3 +132,5 @@ dist
 /App/.expo
 /App/package-lock.json
 /App/node_modules
+Functions/functions/.DS_Store
+Functions/functions/warp-stuff/.DS_Store
