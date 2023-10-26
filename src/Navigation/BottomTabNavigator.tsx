@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { AuthContext } from '../utils/AuthSession';
-import PropertiesTab from '../tabs/PropertiesTab';
+import Feed from '../tabs/Feed';
 import BookingsTab from '../tabs/BookingsTab';
 import ChatTab from '../tabs/ChatTab';
 import ProfileTab from '../tabs/ProfileTab';
@@ -25,13 +25,13 @@ const BottomTabNavigator: React.FC = () => {
 
           let iconName;
           switch (route.name) {
-            case 'Properties':
+            case 'Feed':
               iconName = 'home';
               break;
             case 'Bookings':
               iconName = 'calendar';
               break;
-            case 'Chat':
+            case 'Friends':
               iconName = 'email';
               break;
             case 'Profile':
@@ -50,9 +50,9 @@ const BottomTabNavigator: React.FC = () => {
         headerTitle: () => <HeaderLogo />
       })}
     >
-      <BottomTab.Screen name="Properties" component={PropertiesTab} />
+      <BottomTab.Screen name="Feed" component={Feed} />
       <BottomTab.Screen name="Bookings" component={BookingsTab} />
-      <BottomTab.Screen name="Chat" component={ChatTab} />
+      <BottomTab.Screen name="Friends" component={ChatTab} />
       <BottomTab.Screen name="Profile" component={ProfileTab} />
     </BottomTab.Navigator>
   );

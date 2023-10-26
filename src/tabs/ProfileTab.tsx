@@ -28,45 +28,18 @@ const ProfileTab: React.FC = () => {
     }
   };
 
-  const handleDeleteAccount = () => {
-    Alert.alert(
-      'Delete Account',
-      'Are you sure you want to delete your account?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: () => Alert.alert('Deleted', 'Account has been deleted'),
-        },
-      ]
-    );
-  };
-
   return (
     <ScrollView style={styles.container}>
       {userDetails && (
         <View style={styles.profileSection}>
           <Image style={styles.profileImage} source={{ uri: userDetails.picture }} />
           <Text style={styles.userName}>{userDetails.name}</Text>
-          <Text style={styles.userDetail}>Member since September 2023</Text>
         </View>
       )}
       {userDetails && (
         <View style={styles.actionList}>
-          {['Settings', 'Payments', 'About', 'Help', 'Terms of Service'].map((item, index) => (
-            <TouchableOpacity style={styles.actionItem} key={index} onPress={() => Alert.alert(item, `${item} Screen`)}>
-              <Text style={styles.actionText}>{item}</Text>
-            </TouchableOpacity>
-          ))}
           <TouchableOpacity style={styles.actionItem} onPress={handleLogout}>
-            <Text style={styles.actionText}>Logout</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionItem} onPress={handleDeleteAccount}>
-            <Text style={styles.deleteAccountText}>Delete Account</Text>
+            <Text style={styles.deleteAccountText}>Logout</Text>
           </TouchableOpacity>
         </View>
       )}

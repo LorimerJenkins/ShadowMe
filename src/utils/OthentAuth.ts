@@ -1,13 +1,19 @@
 import * as AuthSession from 'expo-auth-session';
 import jwt_decode from 'jwt-decode'
+import * as WebBrowser from 'expo-web-browser';
+
+
+WebBrowser.maybeCompleteAuthSession(); // for web
+
 
 const logIn = async () => {
   try {
     const discovery = await AuthSession.fetchDiscoveryAsync(`https://auth.othent.io`);
 
+    const redirectUri = AuthSession.makeRedirectUri();
     const authRequest = new AuthSession.AuthRequest({
       clientId: 'TPcAfB1upnH7ldNwdXbe138K5TDU1j7D',
-      redirectUri: AuthSession.makeRedirectUri(),
+      redirectUri: redirectUri,
       responseType: 'token id_token',
       scopes: ['openid', 'profile', 'email'],
       extraParams: {

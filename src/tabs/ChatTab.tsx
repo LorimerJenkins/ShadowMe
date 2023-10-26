@@ -20,9 +20,8 @@ interface Message {
 }
 
 const commonQuestions = [
-  "Where's good for food around here?",
-  "How do I book a stay?",
-  "There is a problem with my property.",
+  "What is Mr Johnston like?",
+  "What did you put for the finals?",
 ];
 
 const ChatTab = () => {
@@ -70,8 +69,6 @@ const ChatTab = () => {
         renderItem={renderMessage}
         keyExtractor={(item) => item.id.toString()}
         style={styles.chatContainer}
-        onContentSizeChange={() => scrollRef.current?.scrollToEnd({ animated: true })}
-        ListHeaderComponent={<Text style={styles.header}>How can we help you?</Text>}
       />
       <View style={styles.questionsContainer}>
         {commonQuestions.map((question, index) => (

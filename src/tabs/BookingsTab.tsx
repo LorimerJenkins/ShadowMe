@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
-import PieChart from 'react-native-expo-pie-chart';
-import myPropertiesData from '../models/MyProperties';
 
 const BookingsTab: React.FC = () => {
 
@@ -49,74 +47,8 @@ const BookingsTab: React.FC = () => {
 
     return (
         <View style={styles.container}>
-
-            <View style={styles.chartTextContainer}>
-                <View style={styles.smallerChartContainer}>
-                    <PieChart
-                        data={pieChartData}
-                        length={130}
-                        rotation={0}
-                        zeroTotalCircleColor="#ffffff"
-                        containerProps={{}}
-                        svgProps={{}}
-                        gProps={{}}
-                        circleProps={{}}
-                    />
-                </View>
-                <View style={styles.textContainer}>
-                    <Text style={styles.portfolioValue}>
-                        {portfolioValue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}
-                    </Text>
-                    <Text>Total Value</Text>
-                </View>
-            </View>
-
-            <View style={styles.tabSelector}>
-            <TouchableOpacity onPress={() => setActiveTab('newTab')}>
-                    <Text style={activeTab === 'newTab' ? styles.activeTab : styles.inactiveTab}>New Tab</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => setActiveTab('transactions')}>
-                    <Text style={activeTab === 'transactions' ? styles.activeTab : styles.inactiveTab}>Recent Transactions</Text>
-                </TouchableOpacity>
-            </View>
-
-            {activeTab === 'transactions' ? (
-                <FlatList
-                    data={transactions}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({ item }) => (
-                        <View style={styles.transactionItem}>
-                            <Text>Buy Price: {item.buyPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</Text>
-                            <Text>Sell Price: {item.sellPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</Text>
-                            <Text>USD Worth: {(item.sellPrice - item.buyPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</Text>
-                            <Text>Percentage: {item.percentage}%</Text>
-                            <Text>House: {item.house}</Text>
-                            <TouchableOpacity>
-                                <Text style={styles.link}>View Block</Text>
-                            </TouchableOpacity>
-                        </View>
-                    )}
-                />
-            ) : (
-                <View>
-                    <FlatList
-                        data={transactions}
-                        keyExtractor={(item) => item.id}
-                        renderItem={({ item }) => (
-                            <View style={styles.transactionItem}>
-                                <Text>Buy Price: {item.buyPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</Text>
-                                <Text>Sell Price: {item.sellPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</Text>
-                                <Text>USD Worth: {(item.sellPrice - item.buyPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' })}</Text>
-                                <Text>Percentage: {item.percentage}%</Text>
-                                <Text>House: {item.house}</Text>
-                                <TouchableOpacity>
-                                    <Text style={styles.link}>View Block</Text>
-                                </TouchableOpacity>
-                            </View>
-                        )}
-                    />
-                </View>
-            )}
+            
+            lol
         </View>
     );
 };

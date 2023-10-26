@@ -60,10 +60,14 @@ const LoginScreen = ({ navigation }: LoginScreenProps) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/images/app/header-icon.png')} style={styles.logo} />
-      <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+        <Text style={styles.largeText}>Shadow Me</Text>
+        <Text style={styles.smallText}>(Only Fans for education)</Text>
+        <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+        <View style={styles.buttonContent}>
+          <Image source={require('../assets/images/google-logo.png')} style={styles.googleLogo} />
+          <Text style={styles.buttonText}>Sign in with Google</Text>
+      </View>
+        </TouchableOpacity>
     </View>
   );
 };
@@ -73,6 +77,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#E5EEFF',
   },
   logo: {
     width: 247.5,
@@ -80,15 +85,42 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   loginButton: {
-    paddingVertical: 15,
-    paddingHorizontal: 30,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     borderRadius: 8,
+    backgroundColor: 'black',
+    position: 'absolute',
+    bottom: 50,
+    left: 50,
+    right: 50,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
-    color: 'black',
-    fontSize: 18,
-    fontWeight: 'bold',
+      color: 'white',
+      fontSize: 18,
+      fontWeight: 'bold',
   },
+  largeText: {
+    fontSize: 45,
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  smallText: {
+      fontSize: 16,
+      marginBottom: 50,
+  },
+  buttonContent: {
+      flexDirection: 'row',
+      alignItems: 'center',
+  },
+  googleLogo: {
+      width: 24,
+      height: 24,
+      marginRight: 12,
+  },
+
 });
 
 export default LoginScreen;

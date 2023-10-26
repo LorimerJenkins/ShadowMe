@@ -3,7 +3,7 @@
     "name": "ShadowMe",
     "main": "./index.js",
     "slug": "ShadowMe",
-    "scheme": "ShadowMe",
+    "scheme": "http://localhost:19006/",
     "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./src/assets/images/app/icon.png",
