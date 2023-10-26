@@ -11,8 +11,8 @@ import {
   Image
 } from 'react-native';
 import { AuthContext } from '../utils/AuthSession';
-import { getChats } from '../utils/getChats'
-
+import { getChat } from '../utils/getChat';
+import { sendMessage } from '../utils/sendMessage';
 
 interface Message {
   id: number;
@@ -20,6 +20,11 @@ interface Message {
   sender: string;
 }
 
+interface ChatLogData {
+  content: string;
+  sender: string;
+  timestamp: string;
+}
 
 const ChatTab = () => {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -29,18 +34,14 @@ const ChatTab = () => {
 
   useEffect(() => {
     const fetchChats = async () => {
-
-      const chatLog = await getChats({
+      const chatLog = await getChat({
         recipientId: 'google-oauth2|113378216876216346011',
-        // @ts-ignore
-        senderId: userDetails?.sub,
+        senderId: userDetails?.sub!,
         function: 'getChat',
       });
 
-      console.log(chatLog.data)
-
-      setMessages(chatLog.data.map((m, index) => ({
-        id: index,
+      setMessages(chatLog.data.map((m: ChatLogData) => ({
+        id: m.timestamp,
         text: m.content,
         sender: m.sender
       })));
@@ -49,24 +50,42 @@ const ChatTab = () => {
     fetchChats();
   }, []);
 
-  const sendMessage = (message: string, sender: 'sender' | 'receiver', questionIndex?: number) => {
-    setMessages([...messages, { id: messages.length, text: message, sender }]);
+  const sendMessageAndFetch = async () => {
+    await sendMessage({
+      senderId: userDetails?.sub!,
+      function: 'sendMessage',
+      recipientId: 'google-oauth2|113378216876216346011',
+      messageContent: input
+    });
+
+    const newMessage: Message = {
+      id: messages.length,
+      text: input,
+      sender: userDetails?.sub!,
+    };
+
+    setMessages(prevMessages => [...prevMessages, newMessage]);
+    setInput('');
+
+    setTimeout(() => {
+      scrollRef.current?.scrollToEnd();
+    }, 100);
   };
 
-    const getMessageStyle = (sender: string): ViewStyle => ({
-      backgroundColor: sender === userDetails?.sub ? '#e6e6e6' : '#d1e7dd',
-      marginVertical: 5,
-      padding: 10,
-      borderRadius: 5,
-      maxWidth: '80%',
-    });
+  const getMessageStyle = (sender: string): ViewStyle => ({
+    backgroundColor: sender === userDetails?.sub ? '#e6e6e6' : '#d1e7dd',
+    marginVertical: 5,
+    padding: 10,
+    borderRadius: 5,
+    maxWidth: '80%',
+  });
 
   const renderMessage = ({ item }: { item: Message }) => (
     <View style={styles.messageContainer}>
-      <View style={getMessageStyle(item.sender === userDetails?.sub ? 'sender' : 'receiver')}>
+      <View style={getMessageStyle(item.sender)}>
         <Text style={styles.text}>{item.text}</Text>
       </View>
-      {item.sender === userDetails?.sub && userDetails && userDetails.picture && (
+      {userDetails && userDetails.picture && (
         <Image source={{ uri: userDetails.picture }} style={styles.profilePic} />
       )}
     </View>
@@ -76,7 +95,7 @@ const ChatTab = () => {
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
-      keyboardVerticalOffset={10}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
     >
       <FlatList<Message>
         ref={scrollRef}
@@ -84,16 +103,14 @@ const ChatTab = () => {
         renderItem={renderMessage}
         keyExtractor={(item) => item.id.toString()}
         style={styles.chatContainer}
+        onContentSizeChange={() => scrollRef.current?.scrollToEnd()}
       />
       <TextInput
         style={styles.input}
         placeholder="Type your message..."
         value={input}
         onChangeText={setInput}
-        onSubmitEditing={() => {
-          sendMessage(input, 'sender');
-          setInput('');
-        }}
+        onSubmitEditing={sendMessageAndFetch}
       />
     </KeyboardAvoidingView>
   );
@@ -104,36 +121,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
   },
-  header: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 30,
-  },
   chatContainer: {
     flex: 1,
     paddingHorizontal: 10,
   },
   text: {
     fontSize: 16,
-  },
-  questionsContainer: {
-    borderTopWidth: 1,
-    borderTopColor: '#e6e6e6',
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-  question: {
-    fontSize: 16,
-    color: '#000000',
-    marginBottom: 10,
-    backgroundColor: '#e6e6e6',
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 20,
-    margin: 5,
   },
   input: {
     height: 40,

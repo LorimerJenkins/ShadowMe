@@ -6,7 +6,7 @@ interface PostDataPayload {
     function: string;
 }
 
-export async function getChats(payload: PostDataPayload): Promise<AxiosResponse> {
+export async function getChat(payload: PostDataPayload): Promise<AxiosResponse> {
 
     const endpoint = 'https://shadow-me.netlify.app/.netlify/functions/route';
 
