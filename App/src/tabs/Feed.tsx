@@ -33,24 +33,25 @@ type FeedItemProps = {
 };
 
 const FeedItemComponent: React.FC<FeedItemProps> = ({ item, navigation }) => (
-  <TouchableOpacity
+  <View
     style={styles.feedItemContainer}
-    onPress={() => navigation.navigate('Detail', { item })}
   >
     <View style={styles.userDetails}>
       <Image source={{ uri: item.profilePic }} style={styles.profilePic} />
       <Text style={styles.normalText}>
         {item.user}
         {" at "}
-        <Text style={styles.userSchool}>{item.school}</Text>
+        <Text style={styles.userSchool} onPress={() => navigation.navigate('Institution', { school: item.school })}>{item.school}</Text>
         {" posted a note"}
       </Text>
     </View>
-    <View style={styles.card}>
-      <Image source={{ uri: item.picture }} style={styles.feedImage} />
-      <Text style={styles.feedHeader}>{item.header}</Text>
-    </View>
-  </TouchableOpacity>
+    <TouchableOpacity onPress={() => navigation.navigate('Detail', { item })}>
+      <View style={styles.card}>
+        <Image source={{ uri: item.picture }} style={styles.feedImage} />
+        <Text style={styles.feedHeader}>{item.header}</Text>
+      </View>
+    </TouchableOpacity>
+  </View>
 );
 
 type FeedProps = {
@@ -65,10 +66,12 @@ const FeedTab: React.FC<FeedProps> = ({ navigation }) => {
     <View style={styles.container}>
 
       <View style={styles.userProfileSection}>
-        <View style={styles.userInfo} onPress={() => navigation.replace('Profile')}>
-          <Image source={{ uri: userDetails?.picture }} style={styles.smallProfilePic} />
-          <Text style={styles.greetingText}>Hey, {userDetails?.given_name}!</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.replace('Profile')}>
+          <View style={styles.userInfo}>
+            <Image source={{ uri: userDetails?.picture }} style={styles.smallProfilePic} />
+            <Text style={styles.greetingText}>Hey, {userDetails?.given_name}!</Text>
+          </View>
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => console.log("123")}>
           <Text style={styles.commentIcon}>
             <Ionicons name="md-chatbubble-outline" size={24} />

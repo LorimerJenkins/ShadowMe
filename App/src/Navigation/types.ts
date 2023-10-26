@@ -26,4 +26,5 @@ export type RootStackParamList = {
       }
     };
     TradeProperty: undefined;
+    [name: string]: object | undefined;
   };
