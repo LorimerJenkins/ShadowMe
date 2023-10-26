@@ -119,7 +119,8 @@ const styles = StyleSheet.create({
     color: '#4D4D4D',
     fontSize: 13,
     marginVertical: 10,
-    marginHorizontal: 15
+    marginHorizontal: 15,
+    textAlign: 'justify'
   },
   button: {
     fontFamily: "Futura",

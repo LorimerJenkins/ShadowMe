@@ -6,6 +6,7 @@ import LoginScreen from '../tabs/LoginTab';
 import FeedTab from '../tabs/Feed'
 import ProfileTab from '../tabs/ProfileTab'
 import InstitutionTab from '../tabs/Institution'
+import SubjectTab from '../tabs/Subject'
 
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -17,6 +18,7 @@ const RootStackNavigator: React.FC = () => {
       <Stack.Screen name="Home" component={FeedTab} />
       <Stack.Screen name="Profile" component={ProfileTab} />
       <Stack.Screen name="Institution" component={InstitutionTab} />
+      <Stack.Screen name="Subject" component={SubjectTab} />
     </Stack.Navigator>
   );
 };
