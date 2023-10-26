@@ -130,3 +130,4 @@ dist
 .pnp.*
 /web-build
 .expo
+package-lock.json
