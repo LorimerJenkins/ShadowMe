@@ -1,5 +1,5 @@
-import { sendTxn } from './warp/sendTxn.js';
-import { getChat } from './warp/getChat.js';
+import { sendTxn } from './warp-stuff/warp/sendTxn.js';
+import { getChat } from './warp-stuff/warp/getChat.js';
 
 export const handler = async (event) => {
     if (event.httpMethod !== 'POST') {
