@@ -6,7 +6,7 @@
     "start": "npx expo start",
     "android": "npx expo start --android",
     "ios": "npx expo start --ios",
-    "web": "npx expo install --fix && npx expo start --web"
+    "web": "npx expo start --web"
   },
   "dependencies": {
     "@expo/webpack-config": "^19.0.0",

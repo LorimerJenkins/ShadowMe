@@ -31,14 +31,14 @@ const ChatTab = () => {
     const fetchChats = async () => {
 
       const chatLog = await getChats({
+        recipientId: 'google-oauth2|113378216876216346011',
         // @ts-ignore
-        recipientId: userDetails?.sub,
-        senderId: '1234',
+        senderId: userDetails?.sub,
         function: 'getChat',
       });
 
       console.log(chatLog.data)
-      
+
       setMessages(chatLog.data.map((m, index) => ({
         id: index,
         text: m.content,
