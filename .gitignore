@@ -128,3 +128,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+/App/App/web-build
+/App/.expo
+/App/package-lock.json
+/App/node_modules
+Functions/functions/.DS_Store
+Functions/functions/warp-stuff/.DS_Store
