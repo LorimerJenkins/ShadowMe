@@ -16,41 +16,9 @@ const BottomTabNavigator: React.FC = () => {
   const { userDetails } = useContext(AuthContext);
 
   return (
-    <BottomTab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
-          if (route.name === 'Profile' && userDetails?.picture) {
-            return <Image source={{ uri: userDetails.picture }} style={{ width: size, height: size, borderRadius: size / 2 }} />;
-          }
-
-          let iconName;
-          switch (route.name) {
-            case 'Feed':
-              iconName = 'home';
-              break;
-            case 'Bookings':
-              iconName = 'calendar';
-              break;
-            case 'Friends':
-              iconName = 'email';
-              break;
-            case 'Profile':
-              iconName = 'account';
-              break;
-            default:
-              iconName = 'home';
-              break;
-          }
-
-          return <MaterialCommunityIcons name={iconName as any} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: 'black',
-        tabBarInactiveTintColor: 'gray',
-        tabBarShowLabel: true,
-        headerTitle: () => <HeaderLogo />
-      })}
+    <BottomTab.Navigator 
     >
-      <BottomTab.Screen name="Feed" component={Feed} />
+      <BottomTab.Screen name="Feed" component={Feed} options={{ headerShown: false }} />
       <BottomTab.Screen name="Bookings" component={BookingsTab} />
       <BottomTab.Screen name="Friends" component={ChatTab} />
       <BottomTab.Screen name="Profile" component={ProfileTab} />

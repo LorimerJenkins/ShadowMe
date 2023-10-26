@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   loginButton: {
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 15,
-    borderRadius: 8,
+    borderRadius: 60,
     backgroundColor: 'black',
     position: 'absolute',
     bottom: 50,
@@ -98,18 +98,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
+    fontFamily: "Futura",
+    color: 'white',
+    fontSize: 18,
   },
   largeText: {
+    fontFamily: "Futura",
     fontSize: 45,
     fontWeight: 'bold',
     marginBottom: 10,
   },
   smallText: {
-      fontSize: 16,
-      marginBottom: 50,
+    fontFamily: "Futura",
+    fontSize: 16,
+    marginBottom: 50,
+    color: '#4D4D4D'
   },
   buttonContent: {
       flexDirection: 'row',

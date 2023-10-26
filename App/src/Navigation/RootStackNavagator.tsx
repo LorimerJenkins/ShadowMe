@@ -3,17 +3,18 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackParamList } from './types';
 
 import LoginScreen from '../tabs/LoginTab';
-import HeaderLogo from '../components/HeadlerLogo';
-import BottomTabNavigator from './BottomTabNavigator';
+import FeedTab from '../tabs/Feed'
+import ProfileTab from '../tabs/ProfileTab'
 
 
 const Stack = createStackNavigator<RootStackParamList>();
 
 const RootStackNavigator: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerTitle: () => <HeaderLogo /> }}>
-      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }} />
-      <Stack.Screen name="Home" component={BottomTabNavigator} options={{ headerShown: false }} />
+    <Stack.Navigator initialRouteName="Login" screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Home" component={FeedTab} options={{ headerShown: false }} />
+      <Stack.Screen name="Profile" component={ProfileTab} />
     </Stack.Navigator>
   );
 };

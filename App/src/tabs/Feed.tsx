@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { AuthContext } from '../utils/AuthSession';
+import { Ionicons } from '@expo/vector-icons'
 
 
 type FeedItem = {
@@ -38,14 +39,17 @@ const FeedItemComponent: React.FC<FeedItemProps> = ({ item, navigation }) => (
   >
     <View style={styles.userDetails}>
       <Image source={{ uri: item.profilePic }} style={styles.profilePic} />
-      <View>
-        <Text style={styles.userName}>{item.user}</Text>
+      <Text style={styles.normalText}>
+        {item.user}
+        {" at "}
         <Text style={styles.userSchool}>{item.school}</Text>
-      </View>
+        {" posted a note"}
+      </Text>
     </View>
-    <Text style={styles.feedHeader}>{item.header}</Text>
-    <Image source={{ uri: item.picture }} style={styles.feedImage} />
-    <Text>{item.content}</Text>
+    <View style={styles.card}>
+      <Image source={{ uri: item.picture }} style={styles.feedImage} />
+      <Text style={styles.feedHeader}>{item.header}</Text>
+    </View>
   </TouchableOpacity>
 );
 
@@ -61,12 +65,14 @@ const FeedTab: React.FC<FeedProps> = ({ navigation }) => {
     <View style={styles.container}>
 
       <View style={styles.userProfileSection}>
-        <View style={styles.userInfo}>
+        <View style={styles.userInfo} onPress={() => navigation.replace('Profile')}>
           <Image source={{ uri: userDetails?.picture }} style={styles.smallProfilePic} />
-          <Text style={styles.greetingText}>Hello, {userDetails?.given_name}!</Text>
+          <Text style={styles.greetingText}>Hey, {userDetails?.given_name}!</Text>
         </View>
         <TouchableOpacity onPress={() => console.log("123")}>
-          <Text style={styles.commentIcon}>💬</Text>
+          <Text style={styles.commentIcon}>
+            <Ionicons name="md-chatbubble-outline" size={24} />
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -88,6 +94,12 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: '#FCF6F1',
   },
+  card: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    backgroundColor: '#fff',
+    paddingBottom: 3,
+  },
   feedItemContainer: {
     padding: 10,
     marginVertical: 5,
@@ -96,34 +108,39 @@ const styles = StyleSheet.create({
   userDetails: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginBottom: 9
   },
   profilePic: {
-    width: 40,
-    height: 40,
+    width: 17,
+    height: 17,
     borderRadius: 20,
     marginRight: 10,
   },
-  userName: {
-    fontSize: 16,
-    fontWeight: 'bold',
+  normalText: {
+    fontFamily: "Futura",
+    fontSize: 14,
+    color: '#4D4D4D'
   },
   userSchool: {
-    color: 'grey',
+    fontFamily: "Futura",
+    color: '#000',
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline'
   },
   feedHeader: {
+    fontFamily: "Futura",
     fontSize: 18,
-    marginVertical: 5,
+    marginVertical: 10,
+    marginHorizontal: 15
   },
   feedImage: {
     width: '100%',
     height: 200,
-    borderRadius: 10,
-    marginVertical: 5,
   },
   feedTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 15,
+    fontFamily: "Futura",
+    fontSize: 50,
+    marginVertical: 23,
     marginLeft: 5,
   },
   userProfileSection: {
@@ -137,8 +154,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   greetingText: {
+    fontFamily: "Futura",
     fontSize: 16,
-    fontWeight: 'bold',
   },
   smallProfilePic: {
     width: 30, // Reduced size

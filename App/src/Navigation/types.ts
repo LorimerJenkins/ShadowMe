@@ -1,6 +1,7 @@
 export type RootStackParamList = {
     Login: undefined;
     Home: undefined;
+    Profile: undefined;
     PropertyDetail: {
       property: {
         imageURLs: string[];
