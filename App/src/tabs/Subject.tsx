@@ -52,7 +52,7 @@ export default function SubjectTab({ navigation }: Props) {
   return (
     <View style={styles.container}>
       <View style={styles.headNav}>
-        <TouchableOpacity style={styles.back}>
+        <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
           <Ionicons name="md-arrow-back-outline" size={20} style={styles.backIcon} />
         </TouchableOpacity>
         <Text style={styles.pageTitle}>
